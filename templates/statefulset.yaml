@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.flix.instance_name }}
+#  namespace: {{ .Values.namespace }}
+  labels:
+    app: flix-server
+spec:
+  replicas: {{ .Values.replicaCount }}
+  serviceName: flix-headless
+  selector:
+    matchLabels:
+      app: flix-server
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: flix-server
+    spec:
+      containers:
+        - image: phildh/flix-server:6.4.1_28
+          name: flix-server
+          args:
+            - --hostname=$(FLIX_HOSTNAME).{{ .Values.domainName }}
+            - --http-port={{ .Values.service.port }}
+            - --asset-dir=/mnt/flix-assets
+            - --rpc-port=9876
+            - --rep-port=9877
+            - --config-file=/flix/config.yaml
+            - --log-file=/flix/logs/flix_server.log
+          env:
+            - name: FLIX_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: FLIX_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          volumeMounts:
+            - name: flix-config
+              mountPath: /flix/config.yaml
+              subPath: config.yaml
+            - name: flix-assets-pvc
+              mountPath: /mnt/flix-assets
+            - name: flix-logs
+              mountPath: /flix/logs/
+          ports:
+            - containerPort: {{ .Values.service.port }}
+            - containerPort: 9091
+            - containerPort: 9876
+            - containerPort: 9877
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - /bin/bash
+                - -c
+                - echo $FLIX_IP $FLIX_HOSTNAME.{{ .Values.domainName }} >> /etc/hosts
+        - image: nginx:alpine
+          name: flix-logs
+          command: ["sh", "-c", "tail -f /flix/logs/flix_server.log"]
+          volumeMounts:
+            - name: flix-logs
+              mountPath: /flix/logs/
+      volumes:
+        - name: flix-config
+          secret:
+            secretName: flix-config
+            items:
+              - key: config.yaml
+                path: config.yaml
+        - name: flix-logs
+          emptyDir: {}
+        - name: flix-assets-pvc
+        {{- toYaml .Values.shared_volume | nindent 10 }}
+

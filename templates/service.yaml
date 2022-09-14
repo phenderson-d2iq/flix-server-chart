@@ -1,0 +1,39 @@
+{{- $replicas := .Values.replicaCount | int -}}
+{{- $name := .Values.flix.instance_name  }}
+{{- $namespace := .Values.namespace }}
+{{- $domain := .Values.domainName }}
+{{- $port := .Values.service.port }}
+{{- range $i,$e := until $replicas }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+#  namespace: {{ $namespace }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ $name }}-{{ $i }}.{{ $domain }}
+  name: {{ $name }}-{{ $i }}-svc
+  labels:
+    statefulset.kubernetes.io/pod-name: {{ $name }}-{{ $i }}
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http-port
+      port: {{ $port }}
+      protocol: TCP
+      targetPort: {{ $port }}
+    - name: file-port
+      port: 9091
+      protocol: TCP
+      targetPort: 9091
+    - name: rpc-port
+      port: 9876
+      protocol: TCP
+      targetPort: 9876
+    - name: rpn-port
+      port: 9877
+      protocol: TCP
+      targetPort: 9877
+  selector:
+    app: flix-server
+    statefulset.kubernetes.io/pod-name: {{ $name }}-{{ $i }}
+{{- end }}
