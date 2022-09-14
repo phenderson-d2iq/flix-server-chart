@@ -9,6 +9,6 @@ entries:
     name: flix-server
     type: application
     urls:
-    - https://github.com/phenderson-d2iq/flix-server-chart/flix-server-6.4.1.tgz
+    - https://phenderson-d2iq.github.io/flix-server-chart/flix-server-6.4.1.tgz
     version: 6.4.1
 generated: "2022-09-14T12:55:45.46717-05:00"
