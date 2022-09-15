@@ -53,31 +53,33 @@ The following table lists the required values needed for the chart:
 
 The following is a example of how to format you current flix config in the values.yaml:
 
-    flix:
+```
+flix:
   config:
     floating_license_hostname: 20.98.109.175
     floating_license_port: 4101
     shared_storage: true
-    
+``` 
 
 ---
 
 ## Full values.yaml example:
 
+```
+mysqlDatabase:
+  rootDBpassword: "JyXiP7JofmBer9"
+  dbUser: "flix"
+  dbPassword: "qGQGSLu6BM3hth"
 
-   mysqlDatabase:
-     rootDBpassword: "JyXiP7JofmBer9"
-     dbUser: "flix"
-     dbPassword: "qGQGSLu6BM3hth"
-   
-   mysql_db_pvc:
-     storageClassName: ebs-sc
-     size: 50Gi
-   
-   # Flix Specific configurations:
-   # config - This is the configuration for your Flix Instance. Make sure its in proper yaml format. See commented out example at bottom of page.
-   flix:
-     config:
-       floating_license_hostname: 20.98.109.175
-       floating_license_port: 4101
-       shared_storage: true
+mysql_db_pvc:
+  storageClassName: ebs-sc
+  size: 50Gi
+
+# Flix Specific configurations:
+# config - This is the configuration for your Flix Instance. Make sure its in proper yaml format. See commented out example at bottom of page.
+flix:
+  config:
+    floating_license_hostname: 20.98.109.175
+    floating_license_port: 4101
+    shared_storage: true
+```
