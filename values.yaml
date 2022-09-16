@@ -7,25 +7,25 @@ fullnameOverride: ""
 
 
 # This is the domain name you have configured for External-DNS
-domainName: ""
+domainName: 
 
 externalDns:
-  enabled: ""
+  enabled: 
 
 # This is the number of Flix Instances you want in your namespace
-replicaCount: 3
+replicaCount: 
 
 # Flix Specific configurations:
 # instance_name -  This is the value that will be used for the hostname for the flix servers. Note that this is incremented starting at 0. IE flix-server-0, flix-server-1, etc
 # config - This is the configuration for your Flix Instance. Make sure its in proper yaml format. See commented out example at bottom of page.
 flix:
-  instance_name: ""
+  instance_name: 
   config:
 
 
 # This will be the port Flix client communicates on
 service:
-  port: ""
+  port: 
 
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
 shared_volume:
