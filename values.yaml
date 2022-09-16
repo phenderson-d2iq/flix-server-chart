@@ -9,6 +9,9 @@ fullnameOverride: ""
 # This is the domain name you have configured for External-DNS
 domainName: in-hyper.space
 
+externalDns:
+  enabled: true
+
 # This is the number of Flix Instances you want in your namespace
 replicaCount: 3
 

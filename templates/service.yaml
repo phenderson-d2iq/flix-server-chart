@@ -2,15 +2,17 @@
 {{- $name := .Values.flix.instance_name  }}
 {{- $namespace := .Values.namespace }}
 {{- $domain := .Values.domainName }}
+{{- $edns := .Values.externalDns.enabled }}
 {{- $port := .Values.service.port }}
 {{- range $i,$e := until $replicas }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-#  namespace: {{ $namespace }}
+  {{ if $edns }}
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ $name }}-{{ $i }}.{{ $domain }}
+  {{ end }}
   name: {{ $name }}-{{ $i }}-svc
   labels:
     statefulset.kubernetes.io/pod-name: {{ $name }}-{{ $i }}
