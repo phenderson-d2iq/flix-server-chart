@@ -7,10 +7,10 @@ fullnameOverride: ""
 
 
 # This is the domain name you have configured for External-DNS
-domainName: in-hyper.space
+domainName: ""
 
 externalDns:
-  enabled: true
+  enabled: ""
 
 # This is the number of Flix Instances you want in your namespace
 replicaCount: 3
@@ -19,25 +19,17 @@ replicaCount: 3
 # instance_name -  This is the value that will be used for the hostname for the flix servers. Note that this is incremented starting at 0. IE flix-server-0, flix-server-1, etc
 # config - This is the configuration for your Flix Instance. Make sure its in proper yaml format. See commented out example at bottom of page.
 flix:
-  instance_name: flix-server
+  instance_name: ""
   config:
-    floating_license_hostname: 20.98.109.175
-    floating_license_port: 4101
-    shared_storage: true
-    mysql_hostname: flix-database-svc.flix-database.svc.cluster.local
-    mysql_username: flix
-    mysql_password: qGQGSLu6BM3hth
-    mysql_database: flix-db
-    mysql_max_connections: 140
+
 
 # This will be the port Flix client communicates on
 service:
-  port: 8080
+  port: ""
 
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
 shared_volume:
-  persistentVolumeClaim:
-    claimName: flix-assest-pv-claim
+
 
 # Namespace that you want your Flix Instances deployed in
 #namespace: flix-server
