@@ -31,20 +31,3 @@ service:
 shared_volume:
 
 
-# Namespace that you want your Flix Instances deployed in
-#namespace: flix-server
-
-##
-# EXAMPLE Flix Section
-##
-#flix:
-#  instance_name: flix-server
-#  config:
-#    floating_license_hostname: 20.98.109.175
-#    floating_license_port: 4101
-#    shared_storage: true
-#    mysql_hostname: flix-database-svc.flix-database.svc.cluster.local
-#    mysql_username: flix
-#    mysql_password: qGQGSLu6BM3hth
-#    mysql_database: flix-db
-#    mysql_max_connections: 140

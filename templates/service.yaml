@@ -1,6 +1,5 @@
 {{- $replicas := .Values.replicaCount | int -}}
 {{- $name := .Values.flix.instance_name  }}
-{{- $namespace := .Values.namespace }}
 {{- $domain := .Values.domainName }}
 {{- $edns := .Values.externalDns.enabled }}
 {{- $port := .Values.service.port }}
