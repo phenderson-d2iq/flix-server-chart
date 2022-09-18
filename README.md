@@ -47,7 +47,7 @@ The following table lists the required values needed for the chart:
 | `flix.instanceName`             | This will be the subdomain of your instances.                                                                          | Yes |
 | `flix.config`                    | This will be the Flix config you have with your current set up                                                                  | Yes |
 | `service.port`                   | This is the service port Flix Server listens on                                                                                 | Yes |
-| `shared_volume`                  | This is the shared storage solution required for assests. This is in YAML format and follows the k8s offical docs for volumes.  | Yes |
+| `sharedVolume`                  | This is the shared storage solution required for assests. This is in YAML format and follows the k8s offical docs for volumes.  | Yes |
 | `customAnnotations.enabled`      | Enable or Disable extra annotations for the service                                                                        | Yes |
 | `customAnnotations.annotations`  | List of additional annotations you want for you service                                                                | No  |
 
