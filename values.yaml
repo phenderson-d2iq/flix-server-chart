@@ -9,6 +9,7 @@ fullnameOverride: ""
 # This is the domain name you have configured for External-DNS
 domainName: 
 
+# If you have enabled external-dns with your kommander install you can enable automatic DNS registration for your services
 externalDns:
   enabled: 
 
@@ -30,7 +31,7 @@ service:
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
 shared_volume:
 
-# Add custom annotations if needed
+# Add custom annotations if needed to the service created in your cluster
 customAnnotations:
   enabled: 
   annotations:

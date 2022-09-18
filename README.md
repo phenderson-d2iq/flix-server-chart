@@ -75,10 +75,12 @@ flix:
 ## Full values.yaml example:
 
 ```
+# This is the domain name you have configured for External-DNS
 domainName: in-hyper.space
 
-external-dns:
-  enabled: true
+# If you have enabled external-dns with your kommander install you can enable automatic DNS registration for your services
+externalDns:
+  enabled: false
 
 # This is the number of Flix Instances you want in your namespace
 replicaCount: 3
@@ -87,12 +89,12 @@ replicaCount: 3
 # instance_name -  This is the value that will be used for the hostname for the flix servers. Note that this is incremented starting at 0. IE flix-server-0, flix-server-1, etc
 # config - This is the configuration for your Flix Instance. Make sure its in proper yaml format. See commented out example at bottom of page.
 flix:
-  instance_name: flintstones
+  instance_name: d2iq-demo
   config:
     floating_license_hostname: 20.98.109.175
     floating_license_port: 4101
     shared_storage: true
-    mysql_hostname: flix-database-svc.flixdemo.svc.cluster.local
+    mysql_hostname: flix-database-svc
     mysql_username: flix
     mysql_password: qGQGSLu6BM3hth
     mysql_database: flix-db
@@ -104,6 +106,18 @@ service:
 
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
 shared_volume:
-  persistentVolumeClaim:
-    claimName: flix-assest-pv-claim
+  nfs: 
+    server: 10.98.169.56
+    path: /export/pvc-d9c9126f-f6a2-481d-ae38-71debacbfb62
+
+# Add custom annotations if needed to the service created in your cluster
+customAnnotations:
+  enabled: true
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "Name=nginx-svc,Environment=test,ManagedByRole=,ManagedBy=K8s,owner=phenderson,expiration=3 2h,Application=dkp"
+    service.beta.kubernetes.io/aws-load-balancer-name: "nginx-svc"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing" 
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance" 
+    service.beta.kubernetes.io/aws-load-balancer-type: "external" 
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
 ```
