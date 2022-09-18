@@ -30,4 +30,7 @@ service:
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
 shared_volume:
 
-
+# Add custom annotations if needed
+customAnnotations:
+  enabled: 
+  annotations:

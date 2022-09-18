@@ -2,16 +2,21 @@
 {{- $name := .Values.flix.instance_name  }}
 {{- $domain := .Values.domainName }}
 {{- $edns := .Values.externalDns.enabled }}
+{{- $cano := .Values.customAnnotations.enabled }}
+{{- $cans := .Values.customAnnotations.annotations }}
 {{- $port := .Values.service.port }}
 {{- range $i,$e := until $replicas }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  {{ if $edns }}
   annotations:
+  {{ if $edns }}
     external-dns.alpha.kubernetes.io/hostname: {{ $name }}-{{ $i }}.{{ $domain }}
   {{ end }}
+  {{- if $cano }}
+{{ toYaml $cans | indent 4 }}
+  {{- end }}
   name: {{ $name }}-{{ $i }}-svc
   labels:
     statefulset.kubernetes.io/pod-name: {{ $name }}-{{ $i }}
