@@ -10,7 +10,7 @@ fullnameOverride: ""
 domainName: 
 
 # If you have enabled external-dns with your kommander install you can enable automatic DNS registration for your services
-externalDns:
+externalDNS:
   enabled: 
 
 # This is the number of Flix Instances you want in your namespace
@@ -20,7 +20,7 @@ replicaCount:
 # instance_name -  This is the value that will be used for the hostname for the flix servers. Note that this is incremented starting at 0. IE flix-server-0, flix-server-1, etc
 # config - This is the configuration for your Flix Instance. Make sure its in proper yaml format. See commented out example at bottom of page.
 flix:
-  instance_name: 
+  instanceName: 
   config:
 
 
@@ -29,7 +29,7 @@ service:
   port: 
 
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
-shared_volume:
+sharedVolume:
 
 # Add custom annotations if needed to the service created in your cluster
 customAnnotations:

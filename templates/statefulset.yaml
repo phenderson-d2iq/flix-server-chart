@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.flix.instance_name }}
+  name: {{ .Values.flix.instanceName }}
 #  namespace: {{ .Values.namespace }}
   labels:
     app: flix-server
@@ -76,5 +76,5 @@ spec:
         - name: flix-logs
           emptyDir: {}
         - name: flix-assets-pvc
-        {{- toYaml .Values.shared_volume | nindent 10 }}
+        {{- toYaml .Values.sharedVolume | nindent 10 }}
 
