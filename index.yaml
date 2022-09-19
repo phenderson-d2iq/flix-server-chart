@@ -3,12 +3,12 @@ entries:
   flix-server:
   - apiVersion: v2
     appVersion: 6.4.1
-    created: "2022-09-19T12:32:11.276914-05:00"
+    created: "2022-09-19T12:51:04.692277-05:00"
     description: A Helm chart for running Flix Using Cloud Kubernetes
-    digest: cfa66df80a4088ea0bdef06f9dad6a8746a88ee8bd3f1047b54878cccc3aa53f
+    digest: d7004c13ce16331dabb356970dcc2ac15af831e2db4a95a1e0f7b7cd30d431f4
     name: flix-server
     type: application
     urls:
     - https://phenderson-d2iq.github.io/flix-server-chart/flix-server-6.4.1.tgz
     version: 6.4.1
-generated: "2022-09-19T12:32:11.276059-05:00"
+generated: "2022-09-19T12:51:04.691617-05:00"

@@ -48,8 +48,9 @@ The following table lists the required values needed for the chart:
 | `flix.config`                    | This will be the Flix config you have with your current set up                                                                  | Yes |
 | `service.port`                   | This is the service port Flix Server listens on                                                                                 | Yes |
 | `sharedVolume`                  | This is the shared storage solution required for assests. This is in YAML format and follows the k8s offical docs for volumes.  | Yes |
+| `awsNLB.enabled`      | Enable or Disable AWS Network LB instead of classic LB                                                                        | No |
 | `customAnnotations.enabled`      | Enable or Disable extra annotations for the service                                                                        | Yes |
-| `customAnnotations.annotations`  | List of additional annotations you want for you service                                                                | No  |
+| `customAnnotations.annotations`  | List of additional annotations you want for you service. If you are using AWS NLB make sure to include the required annotations            | Only when using awsNLB  |
 
 
 ## Example format of flix.config:
@@ -109,6 +110,11 @@ shared_volume:
   nfs: 
     server: 10.98.169.56
     path: /export/pvc-d9c9126f-f6a2-481d-ae38-71debacbfb62
+
+# Enable AWS Network Load Balancer instead of Classic Load Balancer
+
+awsNLB:
+  enabled: false
 
 # Add custom annotations if needed to the service created in your cluster
 customAnnotations:
