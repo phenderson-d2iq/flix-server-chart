@@ -121,7 +121,6 @@ customAnnotations:
   enabled: true
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "Name=nginx-svc,Environment=test,ManagedByRole=,ManagedBy=K8s,owner=phenderson,expiration=3 2h,Application=dkp"
-    service.beta.kubernetes.io/aws-load-balancer-name: "nginx-svc"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing" 
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance" 
     service.beta.kubernetes.io/aws-load-balancer-type: "external" 
