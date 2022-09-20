@@ -44,7 +44,7 @@ spec:
             - name: flix-config
               mountPath: /flix/config.yaml
               subPath: config.yaml
-            - name: flix-assets-pvc
+            - name: flix-assets
               mountPath: /mnt/flix-assets
             - name: flix-logs
               mountPath: /flix/logs/
@@ -75,6 +75,49 @@ spec:
                 path: config.yaml
         - name: flix-logs
           emptyDir: {}
-        - name: flix-assets-pvc
+        - name: flix-assets
         {{- toYaml .Values.sharedVolume | nindent 10 }}
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: flix-server-ops
+  name: flix-server-ops
+spec:
+  containers:
+    - image: phildh/flix-server:6.4.1_28-ops
+      imagePullPolicy: Always
+      name: flix-server
+      ports:
+        - containerPort: 8080
+        - containerPort: 9876
+      env:
+        - name: FLIX_HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      volumeMounts:
+        - name: flix-config
+          mountPath: /flix/config.yaml
+          subPath: config.yaml
+        - name: flix-assets
+          mountPath: /mnt/flix-assets
+        - name: flix-logs
+          mountPath: /flix/logs/
+  volumes:
+    - name: flix-config
+      secret:
+        secretName: flix-config
+        items:
+          - key: config.yaml
+            path: config.yaml
+    - name: flix-logs
+      emptyDir: {}
+    - name: flix-assets
+    {{- toYaml .Values.sharedVolume | nindent 6 }}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
 

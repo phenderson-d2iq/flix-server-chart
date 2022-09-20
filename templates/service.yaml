@@ -2,6 +2,7 @@
 {{- $name := .Values.flix.instanceName  }}
 {{- $domain := .Values.domainName }}
 {{- $edns := .Values.externalDNS.enabled }}
+{{- $ednt := .Values.externalDNS.ttl | int | quote }}
 {{- $anlb := .Values.awsNLB.enabled }}
 {{- $cano := .Values.customAnnotations.enabled }}
 {{- $cans := .Values.customAnnotations.annotations }}
@@ -14,6 +15,7 @@ metadata:
   annotations:
   {{- if $edns }}
     external-dns.alpha.kubernetes.io/hostname: {{ $name }}-{{ $i }}.{{ $domain }}
+    external-dns.alpha.kubernetes.io/ttl: {{ $ednt }}
   {{- end }}
   {{- if $anlb }}
     service.beta.kubernetes.io/aws-load-balancer-name: {{ $name }}-{{ $i }}-svc
