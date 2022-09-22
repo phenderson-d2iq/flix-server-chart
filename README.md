@@ -101,10 +101,14 @@ flix:
     mysql_database: flix-db
     mysql_max_connections: 140
 
-# This will be the port Flix client communicates on
+# This will be the port Flix client communicates on. You can also disable services if you want to use a hostNetwork option
 service:
   enabled: true
   port: 8080
+
+# Enables host network, tieing each flix server to a single node and BINDing the service port to the node
+hostNetwork:
+  enabled: false
 
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
 sharedVolume:

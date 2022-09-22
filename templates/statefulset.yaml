@@ -20,6 +20,9 @@ spec:
       labels:
         app: flix-server
     spec:
+      {{- if .Values.hostNetwork.enabled }}
+      hostNetwork: true
+      {{- end }}
       containers:
         - image: phildh/flix-server:6.4.1_28
           name: flix-server
@@ -66,6 +69,15 @@ spec:
           volumeMounts:
             - name: flix-logs
               mountPath: /flix/logs/
+      {{- if .Values.hostNetwork.enabled }}
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: flix-server
+      {{- end }}
       volumes:
         - name: flix-config
           secret:
