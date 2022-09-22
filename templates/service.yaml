@@ -1,3 +1,4 @@
+{{- if .Values.service.enabled -}}
 {{- $replicas := .Values.replicaCount | int -}}
 {{- $name := .Values.flix.instanceName  }}
 {{- $domain := .Values.domainName }}
@@ -48,4 +49,5 @@ spec:
   selector:
     app: flix-server
     statefulset.kubernetes.io/pod-name: {{ $name }}-{{ $i }}
+{{- end }}
 {{- end }}

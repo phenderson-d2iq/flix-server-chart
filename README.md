@@ -90,7 +90,7 @@ replicaCount: 3
 # instance_name -  This is the value that will be used for the hostname for the flix servers. Note that this is incremented starting at 0. IE flix-server-0, flix-server-1, etc
 # config - This is the configuration for your Flix Instance. Make sure its in proper yaml format. See commented out example at bottom of page.
 flix:
-  instance_name: d2iq-demo
+  instanceName: d2iq-demo
   config:
     floating_license_hostname: 20.98.109.175
     floating_license_port: 4101
@@ -103,10 +103,11 @@ flix:
 
 # This will be the port Flix client communicates on
 service:
+  enabled: true
   port: 8080
 
 # This is a kubernetes volume that has RWX capabilties that will be used for the assests folder.
-shared_volume:
+sharedVolume:
   nfs: 
     server: 10.98.169.56
     path: /export/pvc-d9c9126f-f6a2-481d-ae38-71debacbfb62
@@ -118,7 +119,7 @@ awsNLB:
 
 # Add custom annotations if needed to the service created in your cluster
 customAnnotations:
-  enabled: true
+  enabled: false
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "Name=nginx-svc,Environment=test,ManagedByRole=,ManagedBy=K8s,owner=phenderson,expiration=3 2h,Application=dkp"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing" 

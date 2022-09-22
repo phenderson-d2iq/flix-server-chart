@@ -4,6 +4,6 @@ To get started download the Flix 6.4.1 client from https://www.foundry.com/produ
 
 Once you have the client installed, use the following information to login:
 
-URL: http://{{ .Values.flix.instance_name }}-0.{{ .Values.domainName }}:{{ .Values.service.port }}
+URL: http://{{ .Values.flix.instanceName }}-0.{{ .Values.domainName }}:{{ .Values.service.port }}
 Username: admin
 Password: admin
